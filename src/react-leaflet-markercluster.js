@@ -3,6 +3,20 @@ import L from 'leaflet';
 
 require('leaflet.markercluster');
 
+L.MarkerClusterGroup.include({
+  _layerCache: [],
+  _commitLayerCache() {
+    this.addLayers(this._layerCache);
+    this._layerCache = [];
+  },
+  addLayer(layer) {
+    if (this._layerCache.length === 0) {
+      setTimeout(this._commitLayerCache.bind(this), 50);
+    }
+    this._layerCache.push(layer);
+  },
+});
+
 class MarkerClusterGroup extends MapLayer {
   createLeafletElement({ children, leaflet: { map }, ...props }) {
     const clusterProps = {};

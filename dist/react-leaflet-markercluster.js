@@ -26,6 +26,20 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 require('leaflet.markercluster');
 
+_leaflet2.default.MarkerClusterGroup.include({
+  _layerCache: [],
+  _commitLayerCache: function _commitLayerCache() {
+    this.addLayers(this._layerCache);
+    this._layerCache = [];
+  },
+  addLayer: function addLayer(layer) {
+    if (this._layerCache.length === 0) {
+      setTimeout(this._commitLayerCache.bind(this), 50);
+    }
+    this._layerCache.push(layer);
+  }
+});
+
 var MarkerClusterGroup = function (_MapLayer) {
   _inherits(MarkerClusterGroup, _MapLayer);
 
