@@ -4,17 +4,21 @@ import L from 'leaflet';
 require('leaflet.markercluster');
 
 L.MarkerClusterGroup.include({
-  _layerCache: [],
-  _commitLayerCache() {
-    this.addLayers(this._layerCache);
-    this._layerCache = [];
+  _flushLayerBuffer() {
+    this.addLayers(this._layerBuffer);
+    this._layerBuffer = [];
   },
+
   addLayer(layer) {
-    if (this._layerCache.length === 0) {
-      setTimeout(this._commitLayerCache.bind(this), 50);
+    if (this._layerBuffer.length === 0) {
+      setTimeout(this._flushLayerBuffer.bind(this), 50);
     }
-    this._layerCache.push(layer);
+    this._layerBuffer.push(layer);
   },
+});
+
+L.MarkerClusterGroup.addInitHook(function() {
+  this._layerBuffer = [];
 });
 
 class MarkerClusterGroup extends MapLayer {
