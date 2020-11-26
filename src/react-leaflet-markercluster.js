@@ -17,7 +17,7 @@ L.MarkerClusterGroup.include({
   },
 });
 
-L.MarkerClusterGroup.addInitHook(function() {
+L.MarkerClusterGroup.addInitHook(function () {
   this._layerBuffer = [];
 });
 
