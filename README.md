@@ -54,7 +54,7 @@ yarn add react-leaflet-markercluster@next # yarn
 npm install react-leaflet-markercluster # npm
 ```
 
-**NOTE:** the `@next` is required for **react-leaflet v3** support. If you are still using react-leaflet v3, add dependency as `react-leaflet-markercluster@^2.x.x`
+**NOTE:** the `@next` is required for **react-leaflet v3** support. If you are still using react-leaflet v2, add dependency as `react-leaflet-markercluster@^2.x.x`
 
 The `react-leaflet-markercluster` requires `leaflet.markercluster` as [`peerDependency`](https://docs.npmjs.com/files/package.json#peerdependencies)
 
